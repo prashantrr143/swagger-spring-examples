@@ -1,0 +1,66 @@
+swagger: '2.0'
+info:
+  version: 1.0.0
+  title: Order Management API
+  description: API which defines rules for Order Management Micro Service
+  contact: "Prashant"
+  name:  "Prashant Kumar Singh"
+host: "orderservice.openapi.io"
+basePath: "/v2"
+schemes: 
+  -"https"
+  -"http"
+paths:
+  /orders:
+    post:
+      consumes:
+      - "application/json"
+      - "application/xml"
+
+definitions:
+  Order:
+    type: "object"
+    properties:
+      orderId:
+        type: "integer"
+        format: "int64"
+      orderDate:
+        type: "string"
+        format: "date-time"
+      orderAmount:
+        type: "integer"
+        format: "int64"
+      status:
+        type: "string"
+        description: "Status of Order placed"
+        enum: 
+        - "PLACED"
+        - "APPROVED"
+        - "DELIVERED"
+      items:
+        type: "array"
+        items:
+          $ref: "#/definitions/Item"
+      complete:
+        type: "boolean"
+        default: false
+    xml:
+      name: "Order"
+  Item:
+    type: "object"
+    properties:
+      itemId:
+        type: "string"
+        description: "A String representing ID of an Item in the Order Management System"
+      itemName:
+        type: "string"
+        description: " Name of the Item"
+      itemDescription:
+        type: "string"
+        description: "Small descrption of the item"
+      price:
+        type: "number"
+        format: "int32"
+    xml:
+      name: "Item"    
+      
